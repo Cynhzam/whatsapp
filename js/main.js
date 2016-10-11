@@ -1,16 +1,62 @@
 window.addEventListener("load", function(){
 	
-	var contenedor = document.getElementById("chat");
-	var input = document.getElementById("mensajes");
+	var avatar = document.getElementsByClassName("avatar");
+	var inputEnviar = document.getElementById("mensajes");
 	
-	input.addEventListener("click", function(e){
+	inputEnviar.addEventListener("keyup", function(e){
 		e.preventDefault();
-		var nuevoMensaje = document.createElement("div");
-		var mensaje = document.createElement("p");
-		var tiempo = document.createElement("div");
-		
-		nuevoMensaje.classList.add("w-message2");
-		tiempo.classList.add("time");
-		
+		if(event.keyCode == 13){
+			publicar();
+			inputEnviar.value = "";
+		}
 	});
+
+	function publicar(){
+		var containerChat = document.getElementById("chat");
+		var container = document.createElement("div");
+		var nuevoMensaje = document.createElement("div");
+		var texto = document.createElement("p");
+		var hora = document.createElement("div");
+		var horaPub = horaPubli();
+
+		container.classList.add("w-message", "w-message-out");
+		nuevoMensaje.classList.add("w-message-text");
+		hora.classList.add("time");
+
+		containerChat.appendChild(container);
+		container.appendChild(nuevoMensaje);
+		nuevoMensaje.appendChild(texto);
+		nuevoMensaje.appendChild(hora);
+
+		texto.innerText = inputEnviar.value;
+		hora.innerText = horaPub;
+	}
+
+
+	function horaPubli(){
+		var fecha = new Date();
+		var hora = fecha.getHours();
+		var minuto = fecha.getMinutes();
+		var horaPub = hora + ":" + minuto;
+		return horaPub;
+	}
+
 });
+	
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
